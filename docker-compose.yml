@@ -11,6 +11,8 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - testDataDB:/var/lib/mysql
+    ports:
+      - 3306:3306
   test_php:
     image: php:8.2-fpm-to-laravel
     container_name: test_php
