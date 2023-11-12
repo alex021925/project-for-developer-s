@@ -1,0 +1,77 @@
+FROM php:8.2.0RC7-fpm
+MAINTAINER alex021925@gmail.com
+
+
+ENV COMPOSER_MEMORY_LIMIT='-1'
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        libmemcached-dev \
+        libzip-dev \
+        libz-dev \
+        libzip-dev \
+        libpq-dev \
+        libjpeg-dev \
+        libpng-dev \
+        libfreetype6-dev \
+        libssl-dev \
+#        openssh-server \
+        libmagickwand-dev \
+        git \
+        cron \
+#        nano \
+        libxml2-dev \
+        libreadline-dev \
+        libgmp-dev \
+        mariadb-client\
+        unzip
+
+#########    laravel extension Requirements
+#    BCMath PHP Extension
+#    Ctype PHP Extension
+#    Fileinfo PHP Extension
+#    JSON PHP Extension
+#    Mbstring PHP Extension
+# ** OpenSSL PHP Extension
+#    PDO PHP Extension
+#    Tokenizer PHP Extension
+#    XML PHP Extension
+#########
+
+
+# Install the PHP bcmath extension
+RUN docker-php-ext-install bcmath
+
+# Install the PHP pdo_mysql extention
+RUN docker-php-ext-install pdo_mysql
+
+# Install the PHP pdo_pgsql extention
+#RUN docker-php-ext-install pdo_pgsql
+
+
+
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+#intall vim
+RUN apt-get install -q -y vim
+
+#add user not root for develop
+RUN useradd -rm -d /home/ale -s /bin/bash -g www-data -u 1000 ale
+
+#add work dir
+RUN mkdir /app && chown ale:www-data /app
+WORKDIR /app
+
+# Use the default production configuration
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+
+
+#set root password
+RUN echo 'root:phpAdmin' | chpasswd
+
+#install laravel
+USER ale
+RUN composer global require laravel/installer
+RUN echo 'export PATH="$HOME/.composer/vendor/bin:$PATH"' >> $HOME/.bashrc
