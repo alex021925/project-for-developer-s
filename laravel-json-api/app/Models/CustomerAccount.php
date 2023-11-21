@@ -57,4 +57,15 @@ class CustomerAccount extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+
+
+    /**
+     * Get the CustomerAccount for the login with passport.
+     */
+    public function findForPassport($username)
+    {
+        return $this->where('name', $username)->first();
+    }
+
+
 }

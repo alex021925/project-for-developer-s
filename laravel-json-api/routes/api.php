@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Customers\Auth\LoginController as CustomersLoginController;
+use App\Http\Controllers\Api\Customers\Auth\LogoutController as CustomersLogoutController;
 use Illuminate\Support\Facades\Route;
 use LaravelJsonApi\Laravel\Routing\ResourceRegistrar;
 use App\Http\Controllers\Api\V2\Auth\LoginController;
@@ -26,13 +27,28 @@ use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
 Route::prefix('v2')->middleware('json.api')->group(function () {
     Route::post('/login', LoginController::class)->name('login');
     Route::post('/logout', LogoutController::class)->middleware('auth:api');
-    Route::post('/register', RegisterController::class);
-    Route::post('/password-forgot', ForgotPasswordController::class);
-    Route::post('/password-reset', ResetPasswordController::class)->name('password.reset');
+//    Route::post('/register', RegisterController::class);
+//    Route::post('/password-forgot', ForgotPasswordController::class);
+//    Route::post('/password-reset', ResetPasswordController::class)->name('password.reset');
 });
 
-JsonApiRoute::server('v2')->prefix('v2')->resources(function (ResourceRegistrar $server) {
-    $server->resource('users', JsonApiController::class);
-    Route::get('me', [MeController::class, 'readProfile']);
-    Route::patch('me', [MeController::class, 'updateProfile']);
+//JsonApiRoute::server('v2')->prefix('v2')->resources(function (ResourceRegistrar $server) {
+//    $server->resource('users', JsonApiController::class);
+//    Route::get('me', [MeController::class, 'readProfile']);
+//    Route::patch('me', [MeController::class, 'updateProfile']);
+//});
+
+
+
+
+
+Route::name('customers.')->prefix('customers')->middleware('json.api')->group(function () {
+
+    Route::post('/login', CustomersLoginController::class)->name('login');
+    Route::post('/logout', CustomersLogoutController::class)
+        ->middleware('auth:customer')->name('logout');
+
+
+
+
 });

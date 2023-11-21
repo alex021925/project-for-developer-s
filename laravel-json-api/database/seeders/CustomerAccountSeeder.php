@@ -17,7 +17,7 @@ class CustomerAccountSeeder extends Seeder
                 "id" => 1,
                 "data" => [
                     "name" => "CustomerAccount1",
-                    "password" => '$2y$10$OoseEeA4ZFzc4InuAt50J.Q/iEDz2EUElyt9mMpEI0sbTPej3qlLu',
+                    "password" => 'password',
                     "phone" => "+1 (786) 301-9361",
                     "address_street" => "8900 N Kendall",
                     "address_city" => "Miami",
@@ -30,7 +30,7 @@ class CustomerAccountSeeder extends Seeder
                 "id" => 2,
                 "data" => [
                     "name" => "CustomerAccount2",
-                    "password" => '$2y$10$OoseEeA4ZFzc4InuAt50J.Q/iEDz2EUElyt9mMpEI0sbTPej3qlLu',
+                    "password" => 'password',
                     "phone" => "+1 (786) 302-9361",
                     "address_street" => "8910 N Kendall",
                     "address_city" => "Miami",
@@ -43,7 +43,7 @@ class CustomerAccountSeeder extends Seeder
                 "id" => 3,
                 "data" => [
                     "name" => "CustomerAccount3",
-                    "password" => '$2y$10$OoseEeA4ZFzc4InuAt50J.Q/iEDz2EUElyt9mMpEI0sbTPej3qlLu',
+                    "password" => 'password',
                     "phone" => "+1 (786) 303-9361",
                     "address_street" => "8930 N Kendall",
                     "address_city" => "Miami",

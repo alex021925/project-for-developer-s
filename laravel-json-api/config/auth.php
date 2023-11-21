@@ -40,6 +40,10 @@ return [
             'driver' => 'passport',
             'provider' => 'users',
         ],
+        'customer' => [
+            'driver' => 'passport',
+            'provider' => 'customerAccount',
+        ],
     ],
 
     /*
@@ -63,6 +67,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'customerAccount'=> [
+            'driver' => 'eloquent',
+            'model' => App\Models\CustomerAccount::class,
         ],
 
         // 'users' => [
