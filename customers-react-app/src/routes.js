@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-/** 
+/**
   All of the routes for the Material Dashboard 2 React are added here,
   You can add a new route, customize the routes and delete the routes here.
 
@@ -22,7 +22,7 @@ Coded by www.creative-tim.com
 
   For adding a new route you can follow the existing routes in the routes array.
   1. The `type` key with the `collapse` value is used for a route.
-  2. The `type` key with the `title` value is used for a title inside the Sidenav. 
+  2. The `type` key with the `title` value is used for a title inside the Sidenav.
   3. The `type` key with the `divider` value is used for a divider between Sidenav items.
   4. The `name` key is used for the name of the route on the Sidenav.
   5. The `key` key is used for the key of the route (It will help you with the key prop inside a loop).
@@ -52,6 +52,8 @@ import Login from "auth/login";
 import Register from "auth/register";
 import ForgotPassword from "auth/forgot-password";
 import ResetPassword from "auth/reset-password";
+
+import CreateOrder from "layouts/create-order";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -127,6 +129,22 @@ const routes = [
     key: "user-management",
     icon: <Icon fontSize="small">list</Icon>,
     route: "/user-management",
+    component: <UserManagement />,
+  },
+  {
+    type: "examples",
+    name: "Create order",
+    key: "create-order",
+    icon: <Icon fontSize="small">shopping_cart</Icon>,
+    route: "/orders/create",
+    component: <CreateOrder />,
+  },
+  {
+    type: "examples",
+    name: "Orders",
+    key: "orders",
+    icon: <Icon fontSize="small">list</Icon>,
+    route: "/orders",
     component: <UserManagement />,
   },
   {

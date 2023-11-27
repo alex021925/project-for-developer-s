@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Customers\Auth\LoginController as CustomersLoginController;
 use App\Http\Controllers\Api\Customers\Auth\LogoutController as CustomersLogoutController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use LaravelJsonApi\Laravel\Routing\ResourceRegistrar;
 use App\Http\Controllers\Api\V2\Auth\LoginController;
@@ -45,10 +46,13 @@ Route::prefix('v2')->middleware('json.api')->group(function () {
 Route::name('customers.')->prefix('customers')->middleware('json.api')->group(function () {
 
     Route::post('/login', CustomersLoginController::class)->name('login');
-    Route::post('/logout', CustomersLogoutController::class)
-        ->middleware('auth:customer')->name('logout');
+
+    Route::middleware(['auth:customer'])->group(function () {
+
+        Route::post('/logout', CustomersLogoutController::class)->name('logout');
+
+        Route::post('products', [ProductController::class, 'search']);
 
 
-
-
+    });
 });

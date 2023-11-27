@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Http\Resources\ProductCollection;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -13,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all()->paginate(50);
+        return Product::all();
     }
 
     /**
@@ -62,5 +64,18 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    /**
+     * Display a search of the resource.
+     */
+    public function search(Request $request)
+    {
+        if ($request->has('name') && $request->name != "") {
+            return new ProductCollection(Product::query()
+                ->where('name', 'like', '%'.$request->name.'%')
+                ->get());
+        }
+        return new ProductCollection(Product::paginate(50));
     }
 }
