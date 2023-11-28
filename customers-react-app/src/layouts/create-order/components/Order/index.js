@@ -13,6 +13,7 @@ import MDInput from "components/MDInput";
 import {useCreateOrderContext, useCreateOrderDispatchContext} from "../../context";
 import Tooltip from "@mui/material/Tooltip/Tooltip";
 import Grid from "@mui/material/Grid";
+import CustomersService from "../../../../services/customers-service";
 
 
 
@@ -105,6 +106,19 @@ function Order() {
     });
   };
 
+  const createOrderHandler = async (e) => {
+
+    const response = await CustomersService.createOrder(JSON.stringify({
+      products: createOrderContext.orderProductsList,
+      subtotal: subTotal(),
+      taxes: taxes(),
+      total:total(),
+    }))
+      .catch(e => {
+      console.log(e.message);
+    });
+  };
+
   const subTotal = () => {
     return createOrderContext.orderProductsList.reduce((a, b) => a + (b.productAmount * b.price), 0);
   };
@@ -189,7 +203,7 @@ function Order() {
           </Grid>
           <Grid container my={3}>
             <Grid item xs={12} pl={4} display="flex" justifyContent="center" >
-              <MDButton variant="gradient" color="info" size="medium" fullWidth onClick={ clearHandler }>
+              <MDButton variant="gradient" color="info" size="medium" fullWidth onClick={ createOrderHandler }>
                 Submit Order&nbsp;&nbsp;&nbsp;
                 <Icon>check</Icon>
               </MDButton>

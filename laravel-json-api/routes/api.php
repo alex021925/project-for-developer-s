@@ -3,16 +3,10 @@
 use App\Http\Controllers\Api\Customers\Auth\LoginController as CustomersLoginController;
 use App\Http\Controllers\Api\Customers\Auth\LogoutController as CustomersLogoutController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
-use LaravelJsonApi\Laravel\Routing\ResourceRegistrar;
 use App\Http\Controllers\Api\V2\Auth\LoginController;
 use App\Http\Controllers\Api\V2\Auth\LogoutController;
-use App\Http\Controllers\Api\V2\Auth\RegisterController;
-use App\Http\Controllers\Api\V2\Auth\ForgotPasswordController;
-use App\Http\Controllers\Api\V2\Auth\ResetPasswordController;
-use App\Http\Controllers\Api\V2\MeController;
-use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
-use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +46,10 @@ Route::name('customers.')->prefix('customers')->middleware('json.api')->group(fu
         Route::post('/logout', CustomersLogoutController::class)->name('logout');
 
         Route::post('products', [ProductController::class, 'search']);
+
+        Route::resource('orders', OrderController::class)->only([
+            'index', 'store'
+        ]);
 
 
     });

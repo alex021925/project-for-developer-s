@@ -40,7 +40,7 @@ function createOrderReducer(createOrder, action) {
     }
     case 'added': {
       const orderProducts = createOrder.orderProductsList;
-       orderProducts.push( { ...action.element, productAmount: 1 });
+       orderProducts.push( { ...action.element, product_id: action.element.id,productAmount: 1 });
       return {
         ...createOrder,
         orderProductsList: orderProducts,
@@ -48,12 +48,10 @@ function createOrderReducer(createOrder, action) {
       };
     }
     case 'deleted': {
-      const products = createOrder.searchProductsList;
-      products.push(action.element);
       return {
         ...createOrder,
         orderProductsList: createOrder.orderProductsList.filter(t => t.id !== action.element.id),
-        searchProductsList: products,
+        // searchProductsList: products,
       };
     }
     case 'changed': {

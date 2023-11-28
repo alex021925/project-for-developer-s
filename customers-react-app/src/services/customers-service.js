@@ -8,6 +8,11 @@ class CustomersService {
     return await HttpService.post(getProducts, searchText);
   }
 
+  createOrder = async(order) => {
+    const getProducts= 'orders';
+    return await HttpService.post(getProducts, order);
+  }
+
 
 }
 
