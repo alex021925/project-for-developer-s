@@ -23,7 +23,7 @@ class OrderProduct extends Model
     /**
      * Get the Order that owns of the OrderProduct.
      */
-    public function customerAccount(): BelongsTo
+    public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class, 'order_id');
     }

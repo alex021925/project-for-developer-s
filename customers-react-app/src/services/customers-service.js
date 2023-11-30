@@ -4,14 +4,19 @@ class CustomersService {
 
 
   getProducts = async(searchText) => {
-    const getProducts= 'products';
-    return await HttpService.post(getProducts, searchText);
-  }
+    const url= 'products';
+    return await HttpService.post(url, searchText);
+  };
 
   createOrder = async(order) => {
-    const getProducts= 'orders';
-    return await HttpService.post(getProducts, order);
-  }
+    const url= 'orders';
+    return await HttpService.post(url, order);
+  };
+
+  orders = async() => {
+    const url= 'orders';
+    return await HttpService.get(url);
+  };
 
 
 }

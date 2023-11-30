@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderRequest;
+use App\Http\Resources\OrderCollection;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -11,9 +12,17 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $customer = $request->user('customer');
+
+        if(isset($customer)) {
+            return new OrderCollection(Order::query()
+                ->where('customer_account_id', $customer->id)
+                ->paginate(15));
+        }
+
+        return new OrderCollection(Order::paginate(15));
     }
 
     /**
