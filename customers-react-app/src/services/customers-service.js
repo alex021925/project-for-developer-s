@@ -13,8 +13,8 @@ class CustomersService {
     return await HttpService.post(url, order);
   };
 
-  orders = async() => {
-    const url= 'orders';
+  orders = async(url) => {
+    url = url? url :'orders';
     return await HttpService.get(url);
   };
 

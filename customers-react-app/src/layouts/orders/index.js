@@ -24,14 +24,19 @@ const Orders = () => {
 
   const getOrders = async () => {
     let exit = false;
+    let nextUrl = undefined;
+    let rows = [];
     while(! exit)
     {
-      const response = await CustomersService.orders().catch(e => {
+      const response = await CustomersService.orders(nextUrl).catch(e => {
         console.log(e.message)
       });
-      setdataRows(dataRows.concat(response.data));
+      rows = rows.concat(response.data);
+      setdataRows(rows);
       if(response.meta.current_page >= response.meta.last_page)
         exit = true;
+      else
+        nextUrl = response.links.next;
     }
   };
   useEffect(() => {
@@ -63,7 +68,7 @@ const Orders = () => {
                 <LaravelDataTable
                   table={{ columns, rows: rows(dataRows)}}
                   isSorted={true}
-                  entriesPerPage={{ defaultValue: 30, entries: [15, 30, 50] }}
+                  entriesPerPage={{ defaultValue: 15, entries: [10, 15, 30, 50] }}
                   showTotalEntries={true}
                   noEndBorder
                 />
