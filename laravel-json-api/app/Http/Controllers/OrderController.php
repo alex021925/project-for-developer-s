@@ -45,6 +45,10 @@ class OrderController extends Controller
             'total' => $data['total'],
             'customer_account_id' => $request->user()->id
         ])->products()->createMany($data['products']);
+
+        return response()->json([
+            'result' => 'ok'
+        ]);
     }
 
     /**

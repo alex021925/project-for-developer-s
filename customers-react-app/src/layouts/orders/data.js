@@ -16,8 +16,8 @@ export default function data() {
   const productColumns = [
     { Header: "name", accessor: "name", align: "left" },
     { Header: "price", accessor: "price", align: "center" },
-    { Header: "productAmount", accessor: "productAmount", align: "center" },
-    { Header: "totalPrice", accessor: "totalPrice", align: "center" },
+    { Header: "amount", accessor: "productAmount", align: "center" },
+    { Header: "total", accessor: "totalPrice", align: "center" },
   ];
 
   const Rows = (dataRows) => {
@@ -25,12 +25,12 @@ export default function data() {
       return {
         id: elementRow.id,
         date: (new Date(elementRow.date)).toDateString() ,
-        subtotal: elementRow.subtotal,
-        taxes: elementRow.taxes,
+        subtotal: '$' + elementRow.subtotal,
+        taxes: '$' + elementRow.taxes,
         total: (
           <MDBox>
             <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" mr={2} fontSize={20}>
-              {elementRow.total},
+              ${elementRow.total}
             </MDTypography>
           </MDBox>
         ),
@@ -58,11 +58,11 @@ export default function data() {
   return {
     columns: [
       { Header: "id", accessor: "id", align: "center"},
+      { Header: "details", accessor: "details", align: "center", width: "40%" },
       { Header: "date", accessor: "date", align: "left" },
       { Header: "subtotal", accessor: "subtotal", align: "center" },
       { Header: "taxes", accessor: "taxes", align: "center" },
       { Header: "total", accessor: "total", align: "center" },
-      { Header: "details", accessor: "details", align: "center", width: "50%" },
     ],
 
     rows: Rows,

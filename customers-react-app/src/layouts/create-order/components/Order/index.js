@@ -14,6 +14,9 @@ import {useCreateOrderContext, useCreateOrderDispatchContext} from "../../contex
 import Tooltip from "@mui/material/Tooltip/Tooltip";
 import Grid from "@mui/material/Grid";
 import CustomersService from "../../../../services/customers-service";
+import MDSnackbar from "../../../../components/MDSnackbar";
+import {useState} from "react";
+import MDAlert from "../../../../components/MDAlert";
 
 
 
@@ -99,15 +102,51 @@ function Order() {
 
   const createOrderContext = useCreateOrderContext();
   const dispatch = useCreateOrderDispatchContext();
+  const [successSB, setSuccessSB] = useState(false);
+  const [errorSB, setErrorSB] = useState(false);
+  const [errorText, setErrorText] = useState(false);
 
-  const clearHandler = (e) => {
+  const openSuccessSB = () => setSuccessSB(true);
+  const closeSuccessSB = () => setSuccessSB(false);
+  const openErrorSB = () => setErrorSB(true);
+  const closeErrorSB = () => setErrorSB(false);
+
+  const clearHandler = () => {
     dispatch({
       type: 'cleared',
     });
   };
 
-  const createOrderHandler = async (e) => {
+  const renderSuccessSB = (
+    <MDSnackbar
+      color="success"
+      icon="check"
+      title="Create Order successful"
+      content="Your Order was created correctly."
+      dateTime=""
+      open={successSB}
+      onClose={closeSuccessSB}
+      close={closeSuccessSB}
+    />
+  );
 
+  const renderErrorSB = (
+    <MDSnackbar
+      color="error"
+      icon="warning"
+      title="Error at Create Order"
+      content="The order was not created correctly, an error occurred in the process."
+      dateTime=""
+      open={errorSB}
+      onClose={closeErrorSB}
+      close={closeErrorSB}
+      // bgWhite
+    />
+  );
+
+
+  const createOrderHandler = async (e) => {
+    setErrorText(false);
     const response = await CustomersService.createOrder(JSON.stringify({
       products: createOrderContext.orderProductsList,
       subtotal: subTotal(),
@@ -115,8 +154,16 @@ function Order() {
       total:total(),
     }))
       .catch(e => {
-      console.log(e.message);
+        openErrorSB();
+      console.log(e);
+      setErrorText(e);
     });
+    if(response && response.result == "ok")
+    {
+      openSuccessSB();
+      clearHandler();
+    }
+
   };
 
   const subTotal = () => {
@@ -131,18 +178,68 @@ function Order() {
     return subTotal() + taxes();
   };
 
+  const errorsToArray =  (errors) =>
+  {
+    const result = [];
+    Object.keys(errors).forEach(key => {
+      result.push([key, errors[key]]);
+    });
+    return result;
+  };
+
+  const errorTextrender = (errors) => {
+    const errorsArray = errorsToArray(errors);
+    return (
+      errorsArray.map(error => {
+        return (
+          <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
+            {
+              error[1].map( element => (
+                <MDBox component="li" display="flex" flexDirection="column" p={0} m={0} color={"white"}>
+                  { element }
+                </MDBox>
+              ))
+            }
+          </MDBox>
+        )
+      })
+    );
+  };
 
   return (
     <Card sx={{ height: "100%" }}>
-      <MDBox  variant="gradient" coloredShadow={"secondary"}  borderRadius="xl"
+      <MDBox
+        mx={2}
+        mt={-3}
+        py={3}
+        px={2}
+        variant="gradient"
+        bgColor="info"
+        // borderRadius="lg"
+        coloredShadow="info"
+        borderRadius="xl"
         pt={2} px={2} pb={2} display="flex" justifyContent="space-between" alignItems="center">
-        <MDTypography variant="h6" fontWeight="medium">
+        <MDTypography variant="h6" color="white">
           New Order
         </MDTypography>
         <MDButton variant="outlined" color="error" size="small" onClick={ clearHandler }>
           Clear Order
         </MDButton>
       </MDBox>
+
+      { errorText !== false ? (
+        <MDAlert color="error" dismissible>
+            {/*{errorText.message}*/}
+          {
+            errorText.errors ? errorTextrender(errorText.errors) : <div></div>
+          }
+        </MDAlert>
+      ):
+        <div></div>
+      }
+
+
+
       <MDBox p={2}>
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           {
@@ -151,7 +248,6 @@ function Order() {
                                    price={element.price} amount={element.productAmount} />
             })
           }
-
         </MDBox>
       </MDBox>
 
@@ -211,8 +307,8 @@ function Order() {
           </Grid>
         </Grid>
       </Grid>
-
-
+      {renderSuccessSB}
+      {renderErrorSB}
     </Card>
   );
 }

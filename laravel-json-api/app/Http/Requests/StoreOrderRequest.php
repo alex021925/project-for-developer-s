@@ -26,6 +26,56 @@ class StoreOrderRequest extends FormRequest
             'subtotal' => 'required',
             'taxes' => 'required',
             'total' => 'required',
+
+
+            'products.*.product_id' => 'required',
+            'products.*.productAmount' => 'required|numeric|min:1',
+            'products.*.price' => 'required',
+
+
+
+            'products.*.eee' => 'required',
+
+        ];
+    }
+
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function attributes(): array
+    {
+        //'products.*.productAmount' => 'MMMAAA',
+        $attributes = [];
+        $requestDataAll = $this->request->all();
+        if(array_key_exists('products',$requestDataAll)){
+            foreach ($requestDataAll['products'] as $line => $requestData) {
+                foreach ($this->productAttributes() as $input => $value) {
+                    $attributes['products.' . $line . '.' . $input] = $requestData['name'].' '.$value;
+                }
+            }
+        }
+        return $attributes;
+    }
+
+
+
+    /**
+     * Get Products attributes for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function productAttributes(): array
+    {
+        return [
+            'product_id' => '',
+            'productAmount' => 'Amount',
+            'price' => 'Price',
+
+
+            'eee' => 'Error to test',
         ];
     }
 
