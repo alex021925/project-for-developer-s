@@ -39,7 +39,9 @@ Install Composer: https://getcomposer.org/doc/00-intro.md
 2. Download and Install NodeJs LTS version from [NodeJs Official Page](https://nodejs.org/en/download/).
 3. Navigate to the root ./ directory of the product and run `yarn install` or `npm install` to install our local dependencies.
 4. Add in your projeact an .env file with the variables
- - `REACT_APP_URL=your-react-project`
- - `REACT_APP_API_URL=the-path-of-the-api`
- - `REACT_APP_IS_DEMO=false` if you don't want any restrications and true in case you want to add restrictions
+    - `REACT_APP_URL=your-react-project`
+    - `REACT_APP_API_URL=the-path-of-the-api`
+    - `REACT_APP_IS_DEMO=false` if you don't want any restrications and true in case you want to add restrictions
+5. To run server `npm run start`
+ 
 
