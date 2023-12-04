@@ -29,7 +29,7 @@ services:
     volumes:
       - ./laravel-json-api/public/:/app/public
       - ./laravel-json-api/storage/:/app/storage/
-      - ./react-material-laravel-app/build/:/usr/share/nginx/html
+      - ./customers-react-app/build/:/usr/share/nginx/html
       - ./site.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - test_php
