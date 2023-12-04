@@ -56,7 +56,7 @@ const AuthContextProvider = ({ children }) => {
       return;
     }
 
-    setIsAuthenticated(isAuthenticated);
+    setIsAuthenticated(true);
     navigate(location.pathname);
   }, [isAuthenticated]);
 

@@ -78,7 +78,7 @@ function Footer({ company, links }) {
             &nbsp;UPDIVISION&nbsp;
           </MDTypography>
         </Link>
-        for a better web.
+        for Developer’s Position..
       </MDBox>
       <MDBox
         component="ul"
@@ -105,13 +105,13 @@ function Footer({ company, links }) {
 
 // Setting default values for the props of Footer
 Footer.defaultProps = {
-  company: { href: "https://www.creative-tim.com/", name: "Creative Tim" },
+  company: { href: "#", name: "Alejandro" },
   links: [
-    { href: "https://updivision.com/", name: "UPDIVISION" },
-    { href: "https://www.creative-tim.com/", name: "Creative Tim" },
-    { href: "https://www.creative-tim.com/presentation", name: "About Us" },
-    { href: "https://www.creative-tim.com/blog", name: "Blog" },
-    { href: "https://www.creative-tim.com/license", name: "License" },
+    // { href: "https://updivision.com/", name: "UPDIVISION" },
+    // { href: "https://www.creative-tim.com/", name: "Creative Tim" },
+    // { href: "https://www.creative-tim.com/presentation", name: "About Us" },
+    // { href: "https://www.creative-tim.com/blog", name: "Blog" },
+    // { href: "https://www.creative-tim.com/license", name: "License" },
   ],
 };
 

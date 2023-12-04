@@ -42,8 +42,6 @@ import { setupAxiosInterceptors } from "./services/interceptor";
 import ProtectedRoute from "examples/ProtectedRoute";
 import Login from "auth/login";
 import { AuthContext } from "context";
-import UserProfile from "layouts/user-profile";
-import UserManagement from "layouts/user-management";
 import { Helmet } from "react-helmet";
 
 export default function App() {
@@ -243,34 +241,10 @@ export default function App() {
           {layout === "vr" && <Configurator />}
           <Routes>
             <Route path="/auth/login" element={<Login />} />
-            {/*<Route path="/auth/register" element={<Register />} />*/}
-            {/*<Route path="/auth/forgot-password" element={<ForgotPassword />} />*/}
-            {/*<Route path="/auth/reset-password" element={<ResetPassword />} />*/}
-            <Route
-              exact
-              path="user-profile"
-              element={
-                <ProtectedRoute isAuthenticated={authContext.isAuthenticated}>
-                  <UserProfile />
-                </ProtectedRoute>
-              }
-              key="user-profile"
-            />
-            <Route
-              exact
-              path="user-management"
-              element={
-                <ProtectedRoute isAuthenticated={authContext.isAuthenticated}>
-                  <UserManagement />
-                </ProtectedRoute>
-              }
-              key="user-management"
-            />
             {getRoutes(routes)}
             <Route path="*" element={<Navigate to="/dashboard" />} />
           </Routes>
         </ThemeProvider>
-      }
     </>
   );
 }

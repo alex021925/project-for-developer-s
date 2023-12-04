@@ -36,14 +36,6 @@ function BasicLayout({ image, children }) {
 
   return (
     <PageLayout>
-      <DefaultNavbar
-        action={{
-          type: "external",
-          route: "https://creative-tim.com/product/material-dashboard-react-laravel",
-          label: "free download",
-          color: "dark",
-        }}
-      />
       <MDBox
         sx={{ height: "auto", minHeight: "100vh" }}
         display="flex"
@@ -87,11 +79,10 @@ function BasicLayout({ image, children }) {
                     width="80%"
                   >
                     <Typography variant="h3" style={{ color: "white" }}>
-                      Log in to Material Dashboard Laravel Live Preview
+                      Customers log in to Project for Developer’s Position
                     </Typography>
                     <Typography variant="body2" style={{ color: "white" }} margin="0.5rem 0">
-                      Log in to see how you can go from frontend to fullstack in an instant with an
-                      API-based Laravel backend
+                      Log in to see Customers options for Project for Developer’s Position.
                     </Typography>
                     <MDBox
                       display="flex"
@@ -115,11 +106,57 @@ function BasicLayout({ image, children }) {
                               >
                                 Username{" "}
                                 <Typography variant="span" fontWeight="700">
-                                  admin@jsonapi.com
+                                  CustomerAccount1
                                 </Typography>{" "}
                                 with password{" "}
                                 <Typography variant="span" fontWeight="700">
-                                  secret
+                                  password
+                                </Typography>
+                              </Typography>
+                            }
+                          />
+                        </ListItem>
+                      </List>
+                      <List dense={true}>
+                        <ListItem>
+                          <ListItemText
+                            disableTypography
+                            primary={
+                              <Typography
+                                variant="body2"
+                                fontWeight="400"
+                                style={{ color: "white" }}
+                              >
+                                Username{" "}
+                                <Typography variant="span" fontWeight="700">
+                                  CustomerAccount2
+                                </Typography>{" "}
+                                with password{" "}
+                                <Typography variant="span" fontWeight="700">
+                                  password
+                                </Typography>
+                              </Typography>
+                            }
+                          />
+                        </ListItem>
+                      </List>
+                      <List dense={true}>
+                        <ListItem>
+                          <ListItemText
+                            disableTypography
+                            primary={
+                              <Typography
+                                variant="body2"
+                                fontWeight="400"
+                                style={{ color: "white" }}
+                              >
+                                Username{" "}
+                                <Typography variant="span" fontWeight="700">
+                                  CustomerAccount3
+                                </Typography>{" "}
+                                with password{" "}
+                                <Typography variant="span" fontWeight="700">
+                                  password
                                 </Typography>
                               </Typography>
                             }
