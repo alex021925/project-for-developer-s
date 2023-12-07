@@ -75,7 +75,7 @@ class StoreOrderRequest extends FormRequest
             'price' => 'Price',
 
 
-            'eee' => 'Error to test',
+//            'eee' => 'Error to test',
         ];
     }
 
