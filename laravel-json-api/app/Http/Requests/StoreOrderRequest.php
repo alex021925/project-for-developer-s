@@ -34,7 +34,7 @@ class StoreOrderRequest extends FormRequest
 
 
 
-            'products.*.eee' => 'required',
+//            'products.*.eee' => 'required',
 
         ];
     }
