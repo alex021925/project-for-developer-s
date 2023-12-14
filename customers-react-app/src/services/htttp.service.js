@@ -27,7 +27,7 @@ export class HttpService {
   getOptionsConfig = (method, url, data) => {
     return { method, url, data, headers: {
       'Content-Type': 'application/vnd.api+json',
-      'Access-Control-Allow-Origin': '*', 
+      'Access-Control-Allow-Origin': '*',
       }
     };
   };
