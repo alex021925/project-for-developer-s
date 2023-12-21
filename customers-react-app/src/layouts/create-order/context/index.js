@@ -35,6 +35,7 @@ function createOrderReducer(createOrder, action) {
       return {
         ...createOrder,
         searchProductsList: products,
+        lastSearchProductsList: products,
         taxes: action.taxes? action.taxes :createOrder.taxes,
       };
     }
@@ -65,10 +66,10 @@ function createOrderReducer(createOrder, action) {
       };
     }
     case 'cleared': {
-      console.log(initialCreateOrder);
       return {
         ...createOrder,
         orderProductsList: [],
+        searchProductsList: createOrder.lastSearchProductsList,
       };
     }
     default: {
@@ -80,5 +81,6 @@ function createOrderReducer(createOrder, action) {
 const initialCreateOrder = {
   searchProductsList: [],
   orderProductsList: [],
-  taxes: 7
+  taxes: 7,
+  lastSearchProductsList: [],
 };
